@@ -40,18 +40,18 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.osamh165040 }}
+          username: ${{ secrets.github }}
           password: ${{ secrets.dckr_pat_9tQvZUlNT6wvDk3D0_EJDepWvRY }}
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.osamh165040 }}/gp1-demo:latest .
+          docker build -t ${{ secrets.github }}/gp1-demo:latest .
 
       - name: Push image to Docker Hub
-        run: docker push ${{ secrets.osamh165040 }}/gp1-demo:latest
+        run: docker push ${{ secrets.github }}/gp1-demo:latest
 
       - name: Save Docker image locally
-        run: docker save ${{ secrets.osamh165040 }}/gp1-demo:latest -o gp1-demo.tar
+        run: docker save ${{ secrets.github }}/gp1-demo:latest -o gp1-demo.tar
 
       - name: Upload Docker image as artifact
         uses: actions/upload-artifact@v4
