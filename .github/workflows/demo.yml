@@ -26,8 +26,9 @@ jobs:
       - name: Run Pytest
         run: pytest -v --disable-warnings
 
+
       - name: Run Security Scan
-        run: bandit -r . -s B101,B104
+        run: bandit -r .
 
   docker-build:
     runs-on: ubuntu-latest
@@ -43,7 +44,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gp1-demo:latest .
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gp1-demo:latest .
 
       - name: Push image to Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/gp1-demo:latest
